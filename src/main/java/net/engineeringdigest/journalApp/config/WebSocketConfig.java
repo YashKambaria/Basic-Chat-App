@@ -13,7 +13,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		registry.addEndpoint("/ws")
-				.setAllowedOriginPatterns("https://basic-chat-app-tan.vercel.app", "http://127.0.0.1:5500")// Specific origins for security
+				.setAllowedOriginPatterns("https://basic-chat-app-tan.vercel.app", "https://tremendous-cardinal-codeshunt-34b84410.koyeb.app")// Specific origins for security
 				.withSockJS();
 	}
 	

@@ -14,7 +14,7 @@ public class CorsConfig {
 	@Bean
 	public CorsFilter corsFilter() {
 		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowedOrigins(Collections.singletonList("https://basic-chat-app-tan.vercel.app"));
+		config.setAllowedOrigins(Collections.singletonList("https://tremendous-cardinal-codeshunt-34b84410.koyeb.app"));
 		config.setAllowedMethods(Collections.singletonList("*"));
 		config.setAllowCredentials(true);
 		config.setAllowedHeaders(Collections.singletonList("*"));
