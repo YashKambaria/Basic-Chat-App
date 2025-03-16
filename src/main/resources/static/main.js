@@ -19,11 +19,12 @@ var colors = [
 function connect(event) {
     username = document.querySelector('#name').value.trim();
 
-    if(username) {
+    if (username) {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
-        var socket = new SockJS('http://localhost:8080/ws');
+        // Updated WebSocket URL for Koyeb deployment
+        var socket = new SockJS('https://tremendous-cardinal-codeshunt-34b84410.koyeb.app/ws');
         stompClient = Stomp.over(socket);
 
         stompClient.connect({}, onConnected, onError);
@@ -36,11 +37,11 @@ function onConnected() {
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/public', onMessageReceived);
 
-    // Tell your username to the server
+    // Notify server about new user
     stompClient.send("/app/chat.addUser",
         {},
-        JSON.stringify({sender: username, type: 'JOIN'})
-    )
+        JSON.stringify({ sender: username, type: 'JOIN' })
+    );
 
     connectingElement.classList.add('hidden');
 }
@@ -54,7 +55,7 @@ function onError(error) {
 
 function sendMessage(event) {
     var messageContent = messageInput.value.trim();
-    if(messageContent && stompClient) {
+    if (messageContent && stompClient) {
         var chatMessage = {
             sender: username,
             content: messageInput.value,
@@ -72,7 +73,7 @@ function onMessageReceived(payload) {
 
     var messageElement = document.createElement('li');
 
-    if(message.type === 'JOIN') {
+    if (message.type === 'JOIN') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' joined!';
     } else if (message.type === 'LEAVE') {
@@ -114,5 +115,5 @@ function getAvatarColor(messageSender) {
     return colors[index];
 }
 
-usernameForm.addEventListener('submit', connect, true)
-messageForm.addEventListener('submit', sendMessage, true)
+usernameForm.addEventListener('submit', connect, true);
+messageForm.addEventListener('submit', sendMessage, true);
