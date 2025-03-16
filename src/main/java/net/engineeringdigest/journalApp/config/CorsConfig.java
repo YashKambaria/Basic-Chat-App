@@ -14,7 +14,7 @@ public class CorsConfig {
 	@Bean
 	public CorsFilter corsFilter() {
 		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowedOrigins(Collections.singletonList("http://127.0.0.1:5500"));
+		config.setAllowedOrigins(Collections.singletonList("https://basic-chat-app-tan.vercel.app"));
 		config.setAllowedMethods(Collections.singletonList("*"));
 		config.setAllowCredentials(true);
 		config.setAllowedHeaders(Collections.singletonList("*"));
