@@ -14,13 +14,12 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		registry.addEndpoint("/ws")
 				.setAllowedOriginPatterns("https://tremendous-cardinal-codeshunt-34b84410.koyeb.app")
-				.setAllowedOrigins("*")  // Ensures compatibility for both HTTP and HTTPS
-				.withSockJS();           // Ensures fallback support for older browsers
+				.withSockJS();
 	}
 	
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
-		registry.setApplicationDestinationPrefixes("/app"); // For sending messages
-		registry.enableSimpleBroker("/topic");              // For subscribing to topics
+		registry.setApplicationDestinationPrefixes("/app");
+		registry.enableSimpleBroker("/topic");
 	}
 }

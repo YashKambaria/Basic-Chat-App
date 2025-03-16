@@ -1,6 +1,5 @@
 package net.engineeringdigest.journalApp.config;
 
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.engineeringdigest.journalApp.Controller.ChatMessage;
@@ -19,19 +18,17 @@ public class WebSocketEventListener  {
 	private final SimpMessageSendingOperations messageTemplate;
 	
 	@EventListener
-	public void handleWebSocketDisconnectListener(
-			SessionDisconnectEvent event
-	){
-		StompHeaderAccessor headerAccessor=StompHeaderAccessor.wrap(event.getMessage());
-		String username=headerAccessor.getSessionAttributes().get("username").toString();
-		if(username!=null){
-			log.info("User Disconnected : {} ",username);
-			ChatMessage chatMessage= ChatMessage.builder()
+	public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
+		StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
+		String username = (String) headerAccessor.getSessionAttributes().get("username");
+		
+		if (username != null) {
+			log.info("User Disconnected : {} ", username);
+			ChatMessage chatMessage = ChatMessage.builder()
 					.type(MessageType.LEAVE)
 					.sender(username)
 					.build();
-			messageTemplate.convertAndSend("/topic/public",chatMessage);
+			messageTemplate.convertAndSend("/topic/public", chatMessage);
 		}
-		
 	}
 }

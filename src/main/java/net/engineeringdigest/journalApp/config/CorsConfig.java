@@ -14,9 +14,7 @@ public class CorsConfig {
 	@Bean
 	public CorsFilter corsFilter() {
 		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowedOriginPatterns(
-				Arrays.asList("https://tremendous-cardinal-codeshunt-34b84410.koyeb.app")
-		);
+		config.setAllowedOriginPatterns(Arrays.asList("https://tremendous-cardinal-codeshunt-34b84410.koyeb.app"));
 		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		config.setAllowCredentials(true);
 		config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));

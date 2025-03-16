@@ -23,7 +23,6 @@ function connect(event) {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
-        // Updated WebSocket URL for Koyeb deployment
         var socket = new SockJS('https://tremendous-cardinal-codeshunt-34b84410.koyeb.app/ws');
         stompClient = Stomp.over(socket);
 
@@ -32,26 +31,18 @@ function connect(event) {
     event.preventDefault();
 }
 
-
 function onConnected() {
-    // Subscribe to the Public Topic
     stompClient.subscribe('/topic/public', onMessageReceived);
 
-    // Notify server about new user
-    stompClient.send("/app/chat.addUser",
-        {},
-        JSON.stringify({ sender: username, type: 'JOIN' })
-    );
+    stompClient.send("/app/chat.addUser", {}, JSON.stringify({ sender: username, type: 'JOIN' }));
 
     connectingElement.classList.add('hidden');
 }
-
 
 function onError(error) {
     connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
     connectingElement.style.color = 'red';
 }
-
 
 function sendMessage(event) {
     var messageContent = messageInput.value.trim();
@@ -66,7 +57,6 @@ function sendMessage(event) {
     }
     event.preventDefault();
 }
-
 
 function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
@@ -104,7 +94,6 @@ function onMessageReceived(payload) {
     messageArea.appendChild(messageElement);
     messageArea.scrollTop = messageArea.scrollHeight;
 }
-
 
 function getAvatarColor(messageSender) {
     var hash = 0;

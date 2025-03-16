@@ -1,6 +1,5 @@
 package net.engineeringdigest.journalApp.Controller;
 
-
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -21,9 +20,8 @@ public class ChatController {
 	public ChatMessage addUser(
 			@Payload ChatMessage chatMessage,
 			SimpMessageHeaderAccessor simpMessageHeaderAccessor
-	){
-		simpMessageHeaderAccessor. getSessionAttributes().put("username",chatMessage.getSender());
+	) {
+		simpMessageHeaderAccessor.getSessionAttributes().put("username", chatMessage.getSender());
 		return chatMessage;
 	}
-	
 }
